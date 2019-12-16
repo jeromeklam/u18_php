@@ -11,7 +11,7 @@ RUN apt-get update && LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php
 RUN apt-get update && apt-get install -y php${PHP_VER} php${PHP_VER}-cli php${PHP_VER}-common
 RUN apt-get update && apt-get install -y php-mbstring php-mysql php-xml php-pear php-soap
 RUN apt-get update && apt-get install -y php-dev php-tidy php-zip php-memcached
-RUN apt-get update && apt-get install -y php-curl php-ldap php-gd
+RUN apt-get update && apt-get install -y php-curl php-ldap php-gd php-intl php-gmp
 RUN apt-get update && apt-get install -y php-xdebug php-redis php${PHP_VER}-fpm 
 
 # Supervisor
@@ -33,6 +33,7 @@ RUN composer global require "jeromeklam/composer-localdev"
 RUN composer global update
 
 EXPOSE 9000
+EXPOSE 8080
 
 VOLUME ["/var/www/html"]
 WORKDIR /var/www/html
