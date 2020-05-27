@@ -1,4 +1,4 @@
-# Version 1.0.1
+# Version 1.0.3
 
 FROM jeromeklam/u18
 MAINTAINER Jérôme KLAM, "jeromeklam@free.fr"
@@ -20,6 +20,9 @@ RUN apt-get update && apt-get install -y php-xdebug php-redis php${PHP_VER}-fpm
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/php-fpm.conf
 
 # Standardize PHP-FPM executable location
+RUN rm -f /etc/alternatives/php && ln -s /usr/bin/php${PHP_VER} /etc/alternatives/php
+RUN rm -f /etc/alternatives/phar.phar && ln -s /usr/bin/phar.phar${PHP_VER} /etc/alternatives/phar.phar
+RUN rm -f /etc/alternatives/phpize && ln -s /usr/bin/phpize${PHP_VER} /etc/alternatives/phpize
 RUN rm -f /usr/sbin/php-fpm && ln -s /usr/sbin/php-fpm${PHP_VER} /usr/sbin/php-fpm
 RUN mkdir -p /run/php
 
