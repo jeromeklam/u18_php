@@ -38,6 +38,7 @@ RUN composer global require "jeromeklam/composer-localdev"
 RUN composer global update
 
 EXPOSE 9000
+EXPOSE 9080
 EXPOSE 8080
 
 VOLUME ["/var/www/html"]
