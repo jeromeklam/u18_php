@@ -41,7 +41,6 @@ RUN composer global update
 RUN mkdir -p /user.ssh
 COPY docker/makessh.sh /usr/bin/makessh.sh
 RUN chmod 775 /usr/bin/makessh.sh
-RUN /usr/bin/makessh.sh
 
 EXPOSE 9000
 EXPOSE 9080
@@ -50,7 +49,7 @@ EXPOSE 8080
 VOLUME ["/var/www/html", "/user.ssh"]
 WORKDIR /var/www/html
 
-ADD /docker/start.sh /usr/bin/
+ADD docker/start.sh /usr/bin/
 RUN chmod 775 /usr/bin/start.sh
 
 CMD ["/usr/bin/start.sh"]
