@@ -1,4 +1,4 @@
-# Version 1.0.4
+# Version 1.0.6
 
 FROM jeromeklam/u18
 MAINTAINER Jérôme KLAM, "jeromeklam@free.fr"
@@ -37,11 +37,17 @@ RUN mv composer.phar /usr/bin/composer
 RUN composer global require "jeromeklam/composer-localdev"
 RUN composer global update
 
+# ssh key
+RUN mkdir -p /user.ssh
+COPY docker/makessh.sh /usr/bin/makessh.sh
+RUN chmod 775 /usr/bin/makessh.sh
+RUN /usr/bin/makessh.sh
+
 EXPOSE 9000
 EXPOSE 9080
 EXPOSE 8080
 
-VOLUME ["/var/www/html"]
+VOLUME ["/var/www/html", "/user.ssh"]
 WORKDIR /var/www/html
 
 CMD ["/usr/bin/supervisord", "-n"]
