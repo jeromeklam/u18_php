@@ -1,4 +1,4 @@
-# Version 1.0.6
+# Version 1.0.7
 
 FROM jeromeklam/u18
 MAINTAINER Jérôme KLAM, "jeromeklam@free.fr"
@@ -50,4 +50,7 @@ EXPOSE 8080
 VOLUME ["/var/www/html", "/user.ssh"]
 WORKDIR /var/www/html
 
-CMD ["/usr/bin/supervisord", "-n"]
+ADD /docker/start.sh /usr/bin/
+RUN chmod 775 /usr/bin/start.sh
+
+CMD ["/usr/bin/start.sh"]
